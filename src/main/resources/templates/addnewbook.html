@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Addstudent</h1>
+	<div>
+		<form th:object ="${book}" th:action="@{save}" action="#" method="post">
+			<label for="name">Bookame</label>
+			<input type ="text"id="name" th:field="*{name}" />
+			<label for="author">Author</label> 
+			<input type="text" id="author" th:field="*{author}" />
+			<label for="ibsn">ISBN</label>
+			<input type ="text" th:field="*{isbn}" />
+			<label for="year">Year</label>
+			<input type ="text" th:field="*{year}" />
+			<input type ="submit"value="Save">
+			</input>
+		</form>
+	</div>
+</body>
+</html>

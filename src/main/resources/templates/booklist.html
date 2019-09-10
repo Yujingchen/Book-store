@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Books</h1>
+	<table class="table table-striped">
+		<tr>
+			<th>Author</th>
+			<th>Title</th>
+			<th>ISBN</th>
+			<th>Year</th>
+		</tr>
+		<tr th:each="book:${books}">
+			<td th:text="${book.author}">1</td>
+			<td th:text="${book.title}">2</td>
+			<td th:text="${book.isbn}">3</td>
+			<td th:text="${book.year}">4</td>
+		</tr>
+		<a th:href="@{/delete/{id}(id=${student.id})}">Delete</a>
+	</table>
+</body>
+</html>
