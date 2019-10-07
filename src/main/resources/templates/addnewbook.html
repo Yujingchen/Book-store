@@ -10,12 +10,20 @@
 		<form th:object ="${book}" th:action="@{save}" action="#" method="post">
 			<label for="name">Bookame</label>
 			<input type ="text"id="name" th:field="*{name}" />
+			<label for="author">Title</label> 
+			<input type ="text"id="title" th:field="*{title}" />
 			<label for="author">Author</label> 
 			<input type="text" id="author" th:field="*{author}" />
 			<label for="ibsn">ISBN</label>
-			<input type ="text" th:field="*{isbn}" />
+			<input type ="text" id="isbn" th:field="*{isbn}" />
 			<label for="year">Year</label>
-			<input type ="text" th:field="*{year}" />
+			<input type ="text" id="year" th:field="*{year}" />
+			<label for="ibsn">Price</label>
+			<input type ="text" id="price" th:field="*{price}" />
+		 	<label for="deplist">Department</label>
+			<select id="deplist" th:field="*{categoryList}" class="form-control">
+       			<option th:each="category: ${categoryList}" th:value="${category.id}" th:text="${category.name}"></option>
+			</select>
 			<input type ="submit"value="Save">
 			</input>
 		</form>
