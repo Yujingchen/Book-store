@@ -17,11 +17,14 @@ public class Category {
 	private String name;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="category")
 	private List<Book> books;
+	public Category() {}
 	
-	public Category(long id, String name,List<Book> books) {
+
+	
+	public Category(long id, String name) {
 		this.id = id;
 		this.name = name;
-		this.books = books;
+
 	}
 	public long getId() {
 		return id;
@@ -45,5 +48,9 @@ public class Category {
 
 	public void setBooks(List<Book> books) {
 		this.books = books;
-	}	
+	}
+
+
+
+
 }

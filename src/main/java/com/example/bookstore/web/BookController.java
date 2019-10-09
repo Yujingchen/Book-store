@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.bookstore.domain.Book;
 import com.example.bookstore.domain.BookRepository;
 import com.example.bookstore.domain.CategoryRepository;
@@ -16,48 +18,49 @@ import com.example.bookstore.domain.CategoryRepository;
 @Controller
 public class BookController {
 	@Autowired
-	private BookRepository repository;
+	private BookRepository myRepository;
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
 	@RequestMapping(value = "/booklist", method = RequestMethod.GET)
 	public String showbooklist(Model model) {
-		model.addAttribute("books", repository.findAll());
-		return "booklist";
+		System.out.println("HERE");
+		model.addAttribute("books", myRepository.findAll());
+		return "books";
 	}
 	
 	@RequestMapping(value="/all",method=RequestMethod.GET)
 	public @ResponseBody List<Book> bookListRest(){
-		return(List<Book>) repository.findAll();
+		return(List<Book>) myRepository.findAll();
 	}
 	
 	@RequestMapping(value="/book/{id}",method=RequestMethod.GET)
 	public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId){
-		return repository.findById(bookId);
+		return myRepository.findById(bookId);
 	}
 	
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addBook(Model model) {
 		model.addAttribute("book", new Book());
-		model.addAttribute("categoryList", categoryRepository.findAll());
+		model.addAttribute("categories", categoryRepository.findAll());
 		return "addnewbook";
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String savebook(Book book) {
-		repository.save(book);
+		myRepository.save(book);
 		return "redirect:booklist";
 	}
 	
-	@RequestMapping(value = "/edit/{id}")
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String addStudent(@PathVariable("id") Long bookId, Model model) {
-		model.addAttribute("book", repository.findById(bookId));
+		model.addAttribute("book", myRepository.findById(bookId));
 		model.addAttribute("categories", categoryRepository.findAll());
 		return "editBook";
 }
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deletebook(@PathVariable("id") Long bookId, Model model) {
-		repository.deleteById(bookId);
+		myRepository.deleteById(bookId);
 		return "redirect:../booklist";
 	}
 }
