@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 
 <title>Book list</title>
@@ -9,7 +9,6 @@
 	<h1>Books</h1>
 	<table class="table table-striped">
 		<tr>
-			<th>Name</th>
 			<th>Author</th>
 			<th>Title</th>
 			<th>ISBN</th>
@@ -23,8 +22,9 @@
 			<td th:text="${book.isbn}">3</td>
 			<td th:text="${book.year}">4</td>
 			<td th:text="${book.price}">5</td>
+			<td th:text="${book.category}">6</td>
 			<td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
-			<td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+			<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
 		</tr>
 	</table>
 	<a href="/add">Add Student</a>

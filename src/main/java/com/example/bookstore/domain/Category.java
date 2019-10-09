@@ -50,7 +50,9 @@ public class Category {
 		this.books = books;
 	}
 
-
+	public String toString() {
+		return name;
+	} 
 
 
 }
